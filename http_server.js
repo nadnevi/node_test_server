@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+var listenPort = 8080;
+
 // Enable url and json encoded bodies
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
@@ -20,9 +22,12 @@ app.all('*', function (req, res) {
   console.log('req.query =', req.query);
   console.log('req.body =', req.body);
   console.log('*************************************************************');
-  res.send({'message' : req.method + ' request to ' + req.path + ' successful'});
+  // JSON response
+  //  res.send({'message' : req.method + ' request to ' + req.path + ' successful'});
+  // HTML response
+  res.send(`<html><body><p><i>${req.method}</i> request to <i>${req.path}</i> was successful</p></body></html>`)
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(listenPort, function () {
+  console.log('Example app listening on port ' + listenPort + '!');
 });
